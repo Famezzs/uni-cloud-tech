@@ -38,8 +38,13 @@ variable "name" {
   type        = string
 }
 
-variable "filename" {
-  description = "File Path"
+variable "code_path" {
+  description = "Path to Code to Use for the Lambda"
+  type        = string
+}
+
+variable "output_path" {
+  description = "Zip Output Path"
   type        = string
 }
 

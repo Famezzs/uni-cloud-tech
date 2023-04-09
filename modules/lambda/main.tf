@@ -4,10 +4,20 @@ module "labels" {
   name    = var.name
 }
 
+data "archive_file" "lambdazip" {
+  type        = "zip"
+  output_path = var.output_path
+  source_dir = var.code_path
+}
+
 resource "aws_lambda_function" "test_lambda" {
-  filename      = var.filename
+  filename      = var.output_path
   function_name = module.labels.id
   role          = var.role_arn
   handler       = var.handler
   runtime       = var.runtime
+
+  depends_on = [
+    data.archive_file.lambdazip
+  ]
 }

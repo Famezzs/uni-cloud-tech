@@ -49,7 +49,8 @@ module "lambda" {
   source   = "./modules/lambda"
   context  = module.default_labels.context
   name     = "lambda"
-  filename = "modules/lambda/test.zip"
+  code_path = "${path.module}/api"
+  output_path = "${path.module}/lambda.zip"
   role_arn = module.lambda_iam.role_arn
   handler  = "index.handler"
   runtime  = "nodejs14.x"
