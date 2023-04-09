@@ -1,5 +1,5 @@
 variable "context" {
-   type = object({
+  type = object({
     enabled             = bool
     namespace           = string
     environment         = string
