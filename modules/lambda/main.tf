@@ -4,13 +4,13 @@ module "labels" {
   name    = var.name
 }
 
-data "archive_file" "lambdazip" {
+data "archive_file" "lambda_zip" {
   type        = "zip"
   output_path = var.output_path
   source_dir = var.code_path
 }
 
-resource "aws_lambda_function" "test_lambda" {
+resource "aws_lambda_function" "lambda" {
   filename      = var.output_path
   function_name = module.labels.id
   role          = var.role_arn
@@ -18,6 +18,6 @@ resource "aws_lambda_function" "test_lambda" {
   runtime       = var.runtime
 
   depends_on = [
-    data.archive_file.lambdazip
+    data.archive_file.lambda_zip
   ]
 }
