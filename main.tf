@@ -55,3 +55,10 @@ module "lambda" {
   handler  = "index.handler"
   runtime  = "nodejs14.x"
 }
+
+module "api-gateway" {
+  source   = "./modules/api-gateway"
+  context  = module.default_labels.context
+  name     = "apigateway"
+  lambda_uri = module.lambda.invoke_uri
+}
