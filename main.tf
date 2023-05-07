@@ -62,3 +62,9 @@ module "api-gateway" {
   name     = "apigateway"
   lambda_uri = module.lambda.invoke_uri
 }
+
+module "static_website_bucket" {
+  source = "./modules/s3-bucket"
+  context = module.default_labels.context
+  name = "static-website"
+}
