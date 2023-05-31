@@ -62,3 +62,12 @@ module "api-gateway" {
   name     = "apigateway"
   lambda_uri = module.lambda.invoke_uri
 }
+
+module "alarm" {
+  source   = "./modules/cloud-watch"
+  context  = module.default_labels.context
+  name     = "lambda_metric"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  metric_name = "CPUUtilization"
+  statistic = "Average"
+}
